@@ -1,13 +1,10 @@
 package server
 
 import (
-	"context"
 	"crypto/sha256"
 	"fmt"
 	"net/http"
 	"time"
-
-	"github.com/jetuuuu/hl_homework/log"
 
 	"github.com/jetuuuu/hl_homework/mysql"
 
@@ -137,7 +134,6 @@ func generateToken(eCtx echo.Context, login string) (string, error) {
 
 func obfuscate(s string) string {
 	const salt = "fghdsjkirewo84329fnap"
-	log.Debug(context.Background(), "obfuscate", map[string]interface{}{"s": s})
 
 	ret := sha256.Sum256([]byte(s + salt))
 
