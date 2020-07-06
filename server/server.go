@@ -31,8 +31,6 @@ func (s Server) Login(eCtx echo.Context) error {
 		return eCtx.JSON(http.StatusBadRequest, err)
 	}
 
-	log.Debug(ctx, "params", map[string]interface{}{"params": params})
-
 	params.Password = obfuscate(params.Password)
 
 	exists := s.Store.IsUserExist(ctx, params.Login, params.Password)
@@ -69,16 +67,26 @@ func (s Server) GetUser(eCtx echo.Context) error {
 
 func (s Server) CreateUser(eCtx echo.Context) error {
 	ctx := eCtx.Request().Context()
-	u := mysql.User{}
+	u := struct {
+		mysql.User
+		Pass string `json:"password"`
+	}{}
 
 	err := eCtx.Bind(&u)
 	if err != nil {
 		return eCtx.JSON(http.StatusBadRequest, err)
 	}
 
-	u.Password = obfuscate(u.Password)
-
-	err = s.Store.CreateUser(ctx, u)
+	err = s.Store.CreateUser(ctx, mysql.User{
+		Login:     u.Login,
+		Password:  obfuscate(u.Pass),
+		FirstName: u.FirstName,
+		LastName:  u.LastName,
+		Age:       u.Age,
+		Sex:       u.Sex,
+		City:      u.City,
+		Hobby:     u.Hobby,
+	})
 	if err != nil {
 		return eCtx.JSON(http.StatusInternalServerError, err)
 	}
