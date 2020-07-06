@@ -1,0 +1,18 @@
+db:
+    image: mysql:latest
+    #command: --default-authentication-plugin=mysql_native_password
+    container_name: otus-mysql
+    # build: mysql
+    environment:
+        MYSQL_DATABASES: otus
+        MYSQL_ROOT_PASSWORD: rootpassword
+          #- MYSQL_ROOT_PASSWORD=root
+          #- MYSQL_HOST=localhost
+          #- MYSQL_PORT=33306
+          #- MYSQL_USER=user
+          #- MYSQL_PASSWORD=password
+          #- MYSQL_MY_DATABASE=otus
+    ports:
+        - "33306:3306"
+    volumes:
+        - "./volumes/mysql:/var/lib/mysql"
