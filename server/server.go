@@ -127,7 +127,7 @@ func generateToken(eCtx echo.Context, login string) (string, error) {
 
 func obfuscate(s string) string {
 	const salt = "fghdsjkirewo84329fnap"
-	log.Debug(context.Background(), "obfuscate", s)
+	log.Debug(context.Background(), "obfuscate", map[string]interface{}{"s": s})
 
 	ret := sha256.Sum256([]byte(s + salt))
 
