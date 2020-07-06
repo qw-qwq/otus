@@ -31,6 +31,8 @@ func (s Server) Login(eCtx echo.Context) error {
 		return eCtx.JSON(http.StatusBadRequest, err)
 	}
 
+	log.Debug(ctx, "params", map[string]interface{}{"params": params})
+
 	params.Password = obfuscate(params.Password)
 
 	exists := s.Store.IsUserExist(ctx, params.Login, params.Password)
