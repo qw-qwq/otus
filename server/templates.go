@@ -42,7 +42,7 @@ const loginTemplate = `<!DOCTYPE html>
 <body>
     <p>Вход или регистрация</p>
     <form action="/login">
-        <p><input name="login"> <input type="password" name="password"></p>
+        <p><input name="login" required> <input type="password" name="password" required></p>
         <p><input type="submit" value="Войти"></p>
     </form>
     <p><a  href="registration">Регистрация</a></p>
@@ -121,14 +121,14 @@ const registrationTemplate = `<!DOCTYPE html>
 <body>
     <form action="/new">
         <p>
-            <input name="login" placeholder="Логин">
-            <input name="password" placeholder="Пароль" type="password" >
-            <input name="first_name" placeholder="Имя">
-            <input name="last_name" placeholder="Фамилия">
-            <input name="age" placeholder="Возраст">
-            <input name="sex" placeholder="Пол">
-            <input name="city" placeholder="Город">
-            <input name="hobby" placeholder="Хобби">
+            <input name="login" placeholder="Логин" required>
+            <input name="password" placeholder="Пароль" type="password" required>
+            <input name="first_name" placeholder="Имя" required>
+            <input name="last_name" placeholder="Фамилия" required>
+            <input name="age" placeholder="Возраст" type="number" required>
+            <input name="sex" placeholder="Пол" type="number" required>
+            <input name="city" placeholder="Город" required>
+            <input name="hobby" placeholder="Хобби" required>
         </p>
         <p><input type="submit" value="Зарегистрироваться"></p>
     </form>

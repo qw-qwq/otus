@@ -10,15 +10,15 @@ import (
 )
 
 type User struct {
-	Login     string         `json:"login" db:"login"`
-	Password  string         `json:"-" db:"password"`
-	FirstName string         `json:"first_name" db:"first_name"`
-	LastName  string         `json:"last_name" db:"last_name"`
-	Age       uint           `json:"age,string" db:"age"`
-	Sex       uint           `json:"sex,string" db:"sex"`
-	City      string         `json:"city" db:"city"`
-	Hobby     sql.NullString `json:"hobby" db:"hobby"`
-	Friends   []string       `json:"friends"`
+	Login     string   `json:"login" db:"login"`
+	Password  string   `json:"-" db:"password"`
+	FirstName string   `json:"first_name" db:"first_name"`
+	LastName  string   `json:"last_name" db:"last_name"`
+	Age       uint     `json:"age,string" db:"age"`
+	Sex       uint     `json:"sex,string" db:"sex"`
+	City      string   `json:"city" db:"city"`
+	Hobby     string   `json:"hobby" db:"hobby"`
+	Friends   []string `json:"friends"`
 }
 
 func (db *DB) CreateUser(ctx context.Context, u User) error {
