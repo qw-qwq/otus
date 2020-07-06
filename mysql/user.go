@@ -22,7 +22,7 @@ type User struct {
 }
 
 func (db *DB) CreateUser(ctx context.Context, u User) error {
-	const query = "insert into users (login, password, first_name, last_name, age, sex, city)" +
+	const query = "insert into users (login, password, first_name, last_name, age, sex, city, hobby)" +
 		"VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
 	_, err := db.db.Exec(ctx, query, u.Login, u.Password, u.FirstName, u.LastName, u.Age, u.Sex, u.City, u.Hobby)
 
