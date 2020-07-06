@@ -10,21 +10,21 @@ import (
 )
 
 type User struct {
-	Login     string   `json:"login" db:"login"`
-	Password  string   `json:"-" db:"password"`
-	FirstName string   `json:"first_name" db:"first_name"`
-	LastName  string   `json:"last_name" db:"last_name"`
-	Age       uint     `json:"age,string" db:"age"`
-	Sex       uint     `json:"sex,string" db:"sex"`
-	City      string   `json:"city" db:"city"`
-	Hobby     string   `json:"hobby" db:"hobby"`
-	Friends   []string `json:"friends"`
+	Login     string         `json:"login" db:"login"`
+	Password  string         `json:"-" db:"password"`
+	FirstName string         `json:"first_name" db:"first_name"`
+	LastName  string         `json:"last_name" db:"last_name"`
+	Age       uint           `json:"age,string" db:"age"`
+	Sex       uint           `json:"sex,string" db:"sex"`
+	City      string         `json:"city" db:"city"`
+	Hobby     sql.NullString `json:"hobby" db:"hobby"`
+	Friends   []string       `json:"friends"`
 }
 
 func (db *DB) CreateUser(ctx context.Context, u User) error {
 	const query = "insert into users (login, password, first_name, last_name, age, sex, city)" +
-		"VALUES (?, ?, ?, ?, ?, ?, ?)"
-	_, err := db.db.Exec(ctx, query, u.Login, u.Password, u.FirstName, u.LastName, u.Age, u.Sex, u.City)
+		"VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+	_, err := db.db.Exec(ctx, query, u.Login, u.Password, u.FirstName, u.LastName, u.Age, u.Sex, u.City, u.Hobby)
 
 	return err
 }
@@ -34,7 +34,7 @@ func (db *DB) GetUserByID(ctx context.Context, login string) (User, error) {
 
 	u := User{}
 	err := db.db.QueryRow(ctx, queryUser, login).
-		Scan(&u.Login, &u.Password, &u.FirstName, &u.LastName, &u.Age, &u.Sex, &u.City)
+		Scan(&u.Login, &u.Password, &u.FirstName, &u.LastName, &u.Age, &u.Sex, &u.City, &u.Hobby)
 	if err != nil {
 		return User{}, err
 	}
