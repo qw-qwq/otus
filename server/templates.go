@@ -9,14 +9,14 @@ const userTemplate = `<!DOCTYPE html>
 <body>
 
     <div id="user">
-        <p id="login">{{.Login}}</p>
-        <p id="first_name">{{.FirstName}}</p>
-        <p id="last_name">{{.LastName}}</p>
-        <p id="age">{{.Age}}</p>
-        <p id="sex">{{.Sex}}</p>
-        <p id="city">{{.City}}</p>
-        <p id="hobby">{{.Hobby}}</p>
-        <p id="friends">{{range .Friends}}<div>{{ . }}</div>{{end}}</p>
+        <p id="login">Логин: {{.Login}}</p>
+        <p id="first_name">Имя: {{.FirstName}}</p>
+        <p id="last_name">Фамилия: {{.LastName}}</p>
+        <p id="age">Возарст:  {{.Age}}</p>
+        <p id="sex">Пол: {{.Sex}}</p>
+        <p id="city">Город: {{.City}}</p>
+        <p id="hobby">Хобби: {{.Hobby}}</p>
+        <p id="friends">Друзья: {{range .Friends}}<div>{{ . }}</div>{{end}}</p>
         <input type="button" value="Подружиться" id="make_friends"/>
     </div>
 
@@ -42,7 +42,10 @@ const loginTemplate = `<!DOCTYPE html>
 <body>
     <p>Вход или регистрация</p>
     <form action="/login">
-        <p><input name="login" required> <input type="password" name="password" required></p>
+        <p>
+			<input name="login" placeholder="Логин" required>
+			<input type="password" name="password" placeholder="Пароль" required>
+		</p>
         <p><input type="submit" value="Войти"></p>
     </form>
     <p><a  href="registration">Регистрация</a></p>
